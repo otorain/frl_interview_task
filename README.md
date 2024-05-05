@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Usage:
 
-Things you may want to cover:
+1. Start postgresql(ensure that the port `65432` is available):
+```bash
+docker compose up -d
+```
 
-* Ruby version
+2. Prepare database
+```bash
+rails db:prepare
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+3. Run
+```bash
+bin/dev
+```

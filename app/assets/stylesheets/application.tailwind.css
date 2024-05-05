@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+   @apply rounded-md shadow-sm px-4 py-2 text-base font-bold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+}
+
+.btn-primary {
+    @apply border border-transparent bg-indigo-600 hover:bg-indigo-700 text-white;
+}
+
+.btn-default {
+    @apply border border-gray-300 bg-white hover:bg-gray-50 text-gray-700;
+}
+
+.form-control {
+    @apply px-4 py-2 shadow-sm focus:ring-indigo-500 focus:ring-2 focus:outline-none focus:border-indigo-500 block w-full sm:text-sm border-gray-300 border rounded-md
+}

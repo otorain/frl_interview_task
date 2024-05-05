@@ -1,0 +1,34 @@
+<div class="p-4 space-y-4">
+  <h1 class="text-3xl font-bold text-gray-900"> Products </h1>
+
+  <div class="flex justify-end">
+    <%= form_with url: product_detections_path, method: :post, class: "flex items-center space-x-1" do |f| %>
+      <span id="product_link_error" class="mr-1 text-red-600 text-nowrap"></span>
+      <%= f.text_field :url, class: "form-control", placeholder: "Amazon product link", required: true %>
+      <%= f.submit "Add", class: "btn btn-primary", data: { turbo_submits_with: "Detecting..." } %>
+    <% end %>
+  </div>
+
+  <div id="products">
+    <div class="overflow-x-auto overflow-y-auto max-h-[70vh]">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Brand</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Landing image </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Images</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product url</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operation</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <%= render @products %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

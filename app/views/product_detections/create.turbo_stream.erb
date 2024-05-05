@@ -1,0 +1,62 @@
+<%
+  @result => { title:, description:, brand:, landing_image:, images:, }
+%>
+
+<%= turbo_stream.update "turbo-modal" do %>
+  <div class="fixed z-10 inset-0 overflow-y-auto hidden" data-controller="turbo-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen cursor-pointer" aria-hidden="true">&#8203;</span>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+              <h3 class="text-xl leading-6 font-bold text-gray-900" id="modal-title">
+                New product
+              </h3>
+              <div class="mt-4 space-y-4">
+                <div>
+                  <strong class="text-lg">Title:</strong>
+                  <h1><%= title.presence || "None" %></h1>
+                </div>
+                <div>
+                  <strong class="text-lg">Brand:</strong>
+                  <p><%= brand.presence || "None" %></p>
+                </div>
+                <div>
+                  <strong class="text-lg">Description:</strong>
+                  <p><%= description.present? ? simple_format(description).presence : "None" %></p>
+                </div>
+                <div>
+                  <strong class="text-lg block mb-3">Images:</strong>
+                  <% images.each do |image| %>
+                    <img src="<%= image %>" alt="">
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= form_with model: @product, id: "new_product_form" do |f| %>
+          <%= f.hidden_field :title, value: title %>
+          <%= f.hidden_field :description, value: description %>
+          <%= f.hidden_field :brand, value: brand %>
+          <%= f.hidden_field :landing_image, value: landing_image %>
+          <% images.each do |image| %>
+            <%= hidden_field_tag "product[images][]", image %>
+          <% end %>
+          <%= f.hidden_field :url, value: @url %>
+        <% end %>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse items-center">
+          <button type="submit" class="w-full btn btn-primary sm:ml-3 sm:w-auto sm:text-sm" form="new_product_form">
+            Confirm
+          </button>
+          <button type="button" class="mt-3 w-full btn btn-default sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" data-action="turbo-modal#hide">
+            Cancel
+          </button>
+          <span id="new_product_error" class="text-red-500"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
